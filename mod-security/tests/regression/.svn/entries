@@ -1,0 +1,46 @@
+10
+
+dir
+2006
+https://mod-security.svn.sourceforge.net/svnroot/mod-security/m2/experimental/2.7-iis-nginx/tests/regression
+https://mod-security.svn.sourceforge.net/svnroot/mod-security
+
+
+
+2010-05-05T23:00:48.845360Z
+1510
+b1v1r
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9017d574-64ec-4062-9424-5e00b32a252b
+
+config
+dir
+
+target
+dir
+
+rule
+dir
+
+server_root
+dir
+
+misc
+dir
+
+action
+dir
+

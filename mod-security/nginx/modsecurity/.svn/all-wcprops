@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/mod-security/!svn/ver/1992/m2/experimental/2.7-iis-nginx/nginx/modsecurity
+END
+config
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/mod-security/!svn/ver/1974/m2/experimental/2.7-iis-nginx/nginx/modsecurity/config
+END
+ngx_http_modsecurity_module.c
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svnroot/mod-security/!svn/ver/1992/m2/experimental/2.7-iis-nginx/nginx/modsecurity/ngx_http_modsecurity_module.c
+END

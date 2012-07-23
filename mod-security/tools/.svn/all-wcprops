@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tools
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tools/Makefile.am
+END
+rules-updater-example.conf
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tools/rules-updater-example.conf
+END
+rules-updater.pl.in
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tools/rules-updater.pl.in
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tools/README
+END

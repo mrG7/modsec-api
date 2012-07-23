@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/mod-security/!svn/ver/1989/m2/experimental/2.7-iis-nginx/iis/winbuild
+END
+mod_ssl.mak
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/mod_ssl.mak
+END
+init.bat
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/init.bat
+END
+build32.bat
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/build32.bat
+END
+Makefile.win
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/Makefile.win
+END
+fart.exe
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/fart.exe
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/CMakeLists.txt
+END
+libaprutil.mak
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/libaprutil.mak
+END
+howto.txt
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/mod-security/!svn/ver/1989/m2/experimental/2.7-iis-nginx/iis/winbuild/howto.txt
+END
+build64.bat
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/build64.bat
+END
+libapr.mak
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/libapr.mak
+END
+libhttpd.mak
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/libhttpd.mak
+END
+vcvars64.bat
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/vcvars64.bat
+END
+aprutil.mak
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/aprutil.mak
+END
+VCVarsQueryRegistry.bat
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/VCVarsQueryRegistry.bat
+END
+apr.mak
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/apr.mak
+END
+dftables.mak
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/dftables.mak
+END
+buildall.bat
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/buildall.bat
+END
+vsvars32.bat
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/vsvars32.bat
+END
+pcre.mak
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/winbuild/pcre.mak
+END
+build.bat
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/mod-security/!svn/ver/1989/m2/experimental/2.7-iis-nginx/iis/winbuild/build.bat
+END

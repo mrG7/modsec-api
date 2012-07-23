@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/mod-security/!svn/ver/1979/m2/experimental/2.7-iis-nginx/mlogc
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/mlogc/Makefile.am
+END
+Makefile.win
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/mod-security/!svn/ver/1979/m2/experimental/2.7-iis-nginx/mlogc/Makefile.win
+END
+mlogc-batch-load.pl.in
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/mlogc/mlogc-batch-load.pl.in
+END
+mlogc.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/mlogc/mlogc.c
+END
+INSTALL
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/mlogc/INSTALL
+END
+mlogc-default.conf
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/mlogc/mlogc-default.conf
+END

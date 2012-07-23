@@ -1,0 +1,14 @@
+K 13
+svn:eol-style
+V 6
+native
+K 14
+svn:executable
+V 1
+*
+K 13
+svn:mergeinfo
+V 82
+/m2/branches/2.5.x/apache2/autogen.sh:1412-1501
+/m2/trunk/apache2/autogen.sh:9-962
+END

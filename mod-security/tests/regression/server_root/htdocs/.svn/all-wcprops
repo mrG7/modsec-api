@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/htdocs
+END
+test.txt
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/htdocs/test.txt
+END
+test2.txt
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/htdocs/test2.txt
+END
+8k.txt
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/htdocs/8k.txt
+END
+test.pdf
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/htdocs/test.pdf
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/htdocs/index.html
+END

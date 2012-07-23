@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/target
+END
+00-targets.t
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/target/00-targets.t
+END

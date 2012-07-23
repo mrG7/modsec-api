@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/Makefile.am
+END
+gen_rx-pm.pl.in
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/gen_rx-pm.pl.in
+END
+csv_rx-pm.pl.in
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/csv_rx-pm.pl.in
+END
+run-unit-tests.pl.in
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/run-unit-tests.pl.in
+END
+run-regression-tests.pl.in
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/run-regression-tests.pl.in
+END
+msc_test.c
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/msc_test.c
+END

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/rule
+END
+10-xml.t
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/rule/10-xml.t
+END
+20-exceptions.t
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/rule/20-exceptions.t
+END
+00-basics.t
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/rule/00-basics.t
+END
+00-script.t
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/rule/00-script.t
+END
+00-inheritance.t
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/rule/00-inheritance.t
+END

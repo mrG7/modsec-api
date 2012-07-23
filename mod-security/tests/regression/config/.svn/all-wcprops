@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/config
+END
+10-audit-directives.t
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/config/10-audit-directives.t
+END
+10-debug-directives.t
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/config/10-debug-directives.t
+END
+00-load-modsec.t
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/config/00-load-modsec.t
+END
+10-request-directives.t
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/config/10-request-directives.t
+END
+10-misc-directives.t
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/config/10-misc-directives.t
+END
+10-response-directives.t
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/config/10-response-directives.t
+END
+20-chroot.t
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/config/20-chroot.t
+END

@@ -1,0 +1,173 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn
+END
+escapeSeqDecode.t
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/escapeSeqDecode.t
+END
+jsDecode.t
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/jsDecode.t
+END
+urlEncode.t
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/urlEncode.t
+END
+length.t
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/length.t
+END
+replaceComments.t
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/replaceComments.t
+END
+urlDecodeUni.t
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/urlDecodeUni.t
+END
+normalisePathWin.t
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/normalisePathWin.t
+END
+lowercase.t
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/lowercase.t
+END
+parityOdd7bit.t
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/parityOdd7bit.t
+END
+md5.t
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/md5.t
+END
+trimLeft.t
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/trimLeft.t
+END
+hexDecode.t
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/hexDecode.t
+END
+base64Decode.t
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/base64Decode.t
+END
+replaceNulls.t
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/replaceNulls.t
+END
+cssDecode.t
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/cssDecode.t
+END
+sha1.t
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/sha1.t
+END
+parityZero7bit.t
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/parityZero7bit.t
+END
+hexEncode.t
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/hexEncode.t
+END
+base64Encode.t
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/base64Encode.t
+END
+htmlEntityDecode.t
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/htmlEntityDecode.t
+END
+normalisePath.t
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/normalisePath.t
+END
+urlDecode.t
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/urlDecode.t
+END
+compressWhitespace.t
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/compressWhitespace.t
+END
+trimRight.t
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/trimRight.t
+END
+removeWhitespace.t
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/removeWhitespace.t
+END
+removeNulls.t
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/removeNulls.t
+END
+trim.t
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/trim.t
+END
+parityEven7bit.t
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/tfn/parityEven7bit.t
+END

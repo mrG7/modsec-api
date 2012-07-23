@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svnroot/mod-security/!svn/ver/1996/m2/experimental/2.7-iis-nginx/iis
+END
+ModSecurityIIS.sln
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/mod-security/!svn/ver/1988/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS.sln
+END
+Makefile.win
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/mod-security/!svn/ver/1993/m2/experimental/2.7-iis-nginx/iis/Makefile.win
+END
+mymodulefactory.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/mymodulefactory.h
+END
+mymodule.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/mod-security/!svn/ver/1996/m2/experimental/2.7-iis-nginx/iis/mymodule.cpp
+END
+ModSecurityIIS.vcxproj.filters
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/mod-security/!svn/ver/1989/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS.vcxproj.filters
+END
+mymodule.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/mod-security/!svn/ver/1994/m2/experimental/2.7-iis-nginx/iis/mymodule.h
+END
+mod_security2.exp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1993/m2/experimental/2.7-iis-nginx/iis/mod_security2.exp
+END
+ModSecurityIIS.vcxproj.user
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS.vcxproj.user
+END
+readme.htm
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/readme.htm
+END
+mymodule.def
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/mymodule.def
+END
+ModSecurityIIS.dll.manifest
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS.dll.manifest
+END
+moduleconfig.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/moduleconfig.cpp
+END
+mod_security2.lib
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1993/m2/experimental/2.7-iis-nginx/iis/mod_security2.lib
+END
+moduleconfig.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/moduleconfig.h
+END
+main.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/mod-security/!svn/ver/1994/m2/experimental/2.7-iis-nginx/iis/main.cpp
+END
+ModSecurityIIS.vcxproj
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/mod-security/!svn/ver/1989/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS.vcxproj
+END
+ModSecurity.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/mod-security/!svn/ver/1976/m2/experimental/2.7-iis-nginx/iis/ModSecurity.xml
+END

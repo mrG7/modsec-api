@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/misc
+END
+10-tfn-cache.t
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/misc/10-tfn-cache.t
+END
+10-pcre.t
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/misc/10-pcre.t
+END
+00-multipart-parser.t
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/misc/00-multipart-parser.t
+END
+00-phases.t
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/misc/00-phases.t
+END

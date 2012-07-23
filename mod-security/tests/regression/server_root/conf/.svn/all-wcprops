@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/conf
+END
+SoapEnvelope.dtd
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/conf/SoapEnvelope.dtd
+END
+httpd.conf.in
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/conf/httpd.conf.in
+END
+match.lua
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/conf/match.lua
+END
+SoapEnvelope.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/conf/SoapEnvelope.xsd
+END
+SoapEnvelope-bad.dtd
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/conf/SoapEnvelope-bad.dtd
+END
+test.lua
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/conf/test.lua
+END
+SoapEnvelope-bad.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/tests/regression/server_root/conf/SoapEnvelope-bad.xsd
+END

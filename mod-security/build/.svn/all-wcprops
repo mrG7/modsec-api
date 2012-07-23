@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/build
+END
+find_lua.m4
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/build/find_lua.m4
+END
+find_apr.m4
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/build/find_apr.m4
+END
+find_apu.m4
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/build/find_apu.m4
+END
+find_curl.m4
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/build/find_curl.m4
+END
+compile
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/build/compile
+END
+find_pcre.m4
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/build/find_pcre.m4
+END
+apxs-wrapper.in
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/build/apxs-wrapper.in
+END
+find_xml.m4
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/mod-security/!svn/ver/1962/m2/experimental/2.7-iis-nginx/build/find_xml.m4
+END

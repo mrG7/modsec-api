@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/mod-security/!svn/ver/1993/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS/ModSecurityIIS
+END
+README.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/mod-security/!svn/ver/1979/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS/ModSecurityIIS/README.TXT
+END
+ModSecurityIIS.vdproj
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svnroot/mod-security/!svn/ver/1993/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS/ModSecurityIIS/ModSecurityIIS.vdproj
+END
+install.vbs
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svnroot/mod-security/!svn/ver/1979/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS/ModSecurityIIS/install.vbs
+END
+EULA.rtf
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/mod-security/!svn/ver/1989/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS/ModSecurityIIS/EULA.rtf
+END
+ModSecurityLogo.ico
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svnroot/mod-security/!svn/ver/1979/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS/ModSecurityIIS/ModSecurityLogo.ico
+END
+uninstall.vbs
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svnroot/mod-security/!svn/ver/1979/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS/ModSecurityIIS/uninstall.vbs
+END
+ModSecurity.xml
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svnroot/mod-security/!svn/ver/1979/m2/experimental/2.7-iis-nginx/iis/ModSecurityIIS/ModSecurityIIS/ModSecurity.xml
+END
