@@ -205,8 +205,8 @@ int main(int argc, char *argv[])
 
 	modsecSetLogHook(NULL, log);
 
-	//modsecSetReadBody(readbody);
-	//modsecSetReadResponse(readresponse);
+	modsecSetReadBody(readbody);
+	modsecSetReadResponse(readresponse);
 
 	modsecInit();
 
