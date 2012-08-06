@@ -149,22 +149,6 @@ AP_DECLARE(int) ap_index_of_response(int status)
 
 //=========
 
-static void log_error_core(const char *file, int line, int level,
-                           apr_status_t status, const server_rec *s,
-                           const conn_rec *c,
-                           const request_rec *r, apr_pool_t *pool,
-                           const char *fmt, va_list args)
-{
-    char errstr[MAX_STRING_LEN];
-
-    apr_vsnprintf(errstr, MAX_STRING_LEN, fmt, args);
-
-	if(modsecLogHook != NULL)
-		modsecLogHook(modsecLogObj, level, errstr);
-}
-
-//=========
-
 static char *http2env(apr_pool_t *a, const char *w)
 {
     char *res = (char *)apr_palloc(a, sizeof("HTTP_") + strlen(w));
@@ -267,10 +251,16 @@ AP_DECLARE(void) ap_log_error(const char *file, int line, int level,
 //			    __attribute__((format(printf,6,7)))
 {
     va_list args;
+    char errstr[MAX_STRING_LEN];
 
     va_start(args, fmt);
-    log_error_core(file, line, level, status, s, NULL, NULL, NULL, fmt, args);
-    va_end(args);
+
+    apr_vsnprintf(errstr, MAX_STRING_LEN, fmt, args);
+
+	va_end(args);
+
+	if(modsecLogHook != NULL)
+		modsecLogHook(modsecLogObj, level, errstr);
 }
 
 AP_DECLARE(void) ap_log_perror(const char *file, int line, int level, 
@@ -279,10 +269,16 @@ AP_DECLARE(void) ap_log_perror(const char *file, int line, int level,
 //			    __attribute__((format(printf,6,7)))
 {
     va_list args;
+    char errstr[MAX_STRING_LEN];
 
     va_start(args, fmt);
-    log_error_core(file, line, level, status, NULL, NULL, NULL, p, fmt, args);
-    va_end(args);
+
+    apr_vsnprintf(errstr, MAX_STRING_LEN, fmt, args);
+
+	va_end(args);
+
+	if(modsecLogHook != NULL)
+		modsecLogHook(modsecLogObj, level, errstr);
 }
 
 AP_DECLARE(module *) ap_find_linked_module(const char *name)
