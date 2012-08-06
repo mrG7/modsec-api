@@ -4,7 +4,7 @@
 
 #include <cstdio>
 #include "api.h"
-
+#include "ModSecJNIwrapper.h"
 
 char *config_file = NULL;
 char *event_files[1024];
@@ -199,18 +199,20 @@ apr_status_t readresponse(request_rec *r, char *buf, unsigned int length, unsign
 	return APR_SUCCESS;
 }
 
-int main(int argc, char *argv[])
+int processRequest(char *config_file_path, char *event_file_path)
 {
 	directory_config *config;
 	conn_rec *c;
 	request_rec *r;
 
-	parseargs(argc, argv);
-
-	if(config_file == NULL || argc < 3)
+    
+    config_file = config_file_path;
+    event_files[0] = event_file_path;
+    event_file_cnt = 1;
+	
+    if(config_file == NULL)
 	{
-		printf("Usage:\n");
-		printf("standalone.exe -c <config_file> <event_file1> [<event_file2> <event_file3> ...]\n");
+		printf("No config file provided\n");
 		return 0;
 	}
 
@@ -363,5 +365,18 @@ int main(int argc, char *argv[])
 	}
 
 	modsecTerminate();
+    return 0;
+}
+
+int main(int argc, char *argv[])
+{
+    char *config , *event;
+
+    copy_str(&config, "/home/varrunr/tomcat/demo/xssweb.conf");
+            
+    copy_str(&event,  "/home/varrunr/tomcat/demo/test2.dat");
+
+    processRequest( config , event );
+
     return 0;
 }
