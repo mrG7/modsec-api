@@ -19,7 +19,8 @@ public class ModSecurityWrapper {
 		
 		System.out.println("Status:" + status);
 		
-		if( status == 0 ) return true;
+		if( status == Constants.DECLINED ) return true;
+
 		return false;
 	}
 	
