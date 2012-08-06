@@ -2,7 +2,7 @@ package vulnapp.modsecurity.wrappers;
 
 public class ModSecurityWrapper {
 	
-	private native void 
+	private native int 
 	wrapFilterRequest(String config, String event);
 	
 	public static boolean 
