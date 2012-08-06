@@ -2,19 +2,30 @@ package vulnapp.modsecurity.wrappers;
 
 public class ModSecurityWrapper {
 	
+	/* JNI Wrapper */
 	private native int 
 	wrapFilterRequest(String config, String event);
 	
-	public static boolean 
+	public boolean 
 	processRequest( String configPath, 
 					String eventFilePath){
 		int status = 0;
 		
+		System.out.println("Setting config path: " + configPath);
+		System.out.println("Setting event path: " + eventFilePath);
+		
 		// Process Request Here
+		status = new ModSecurityWrapper().wrapFilterRequest(configPath, eventFilePath);
 		
-		if( status == 0) return false;
+		System.out.println("Status:" + status);
 		
-		return true;
+		if( status == 0 ) return true;
+		return false;
 	}
-
+	
+	static{
+		/* Load shared C library */
+		System.loadLibrary("modsecurity");
+	}
+	
 }

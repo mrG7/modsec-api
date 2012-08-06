@@ -204,7 +204,8 @@ int processRequest(char *config_file_path, char *event_file_path)
 	directory_config *config;
 	conn_rec *c;
 	request_rec *r;
-
+    
+    int status = 0;
     
     config_file = config_file_path;
     event_files[0] = event_file_path;
@@ -359,13 +360,40 @@ int processRequest(char *config_file_path, char *event_file_path)
 
 		apr_table_setn(r->subprocess_env, "UNIQUE_ID", "1");
         
-		modsecProcessRequest(r);
+		status = modsecProcessRequest(r);
         modsecProcessResponse(r);
 		modsecFinishRequest(r);
 	}
 
 	modsecTerminate();
-    return 0;
+    return status;
+}
+
+JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrapFilterRequest
+  (JNIEnv *env, jobject obj, jstring config, jstring event)
+{
+    int status = 0;
+    printf("Modsecurity plugin initiated\n");
+
+    char *conf, *req;
+    conf = NULL; 
+    req  = NULL; 
+    
+    copy_str(&conf , (env)->GetStringUTFChars(config, 0));
+    copy_str(&req  , (env)->GetStringUTFChars(event, 0));
+    
+    if( conf == NULL ){
+        printf("No config file provided\n");
+        return 0;
+    }
+    
+    if(req == NULL){
+        printf("No request provided\b");
+        return 0;
+    }
+
+    status = processRequest(conf , req );
+    return status;
 }
 
 int main(int argc, char *argv[])

@@ -16,10 +16,9 @@ public class ProcessRequest {
 		
 		ModSecurityWrapper waf = new ModSecurityWrapper();
 		
-		System.out.println("Processing request");
 		boolean status = waf.processRequest(args[0], args[1]);
 		
-		if( status){
+		if(status){
 			System.out.println("Accepted");
 		}
 		else System.out.println("Denied");
