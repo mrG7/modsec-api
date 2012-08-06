@@ -32,7 +32,7 @@ void copy_str(char ** dest , const char *src)
 	strcpy( *dest , src );
 }
 
-void readeventfile(char *name)
+void readeventfile(char *req , unsigned int req_sz)
 {
 	if(event_file == NULL)
 	{
@@ -40,18 +40,12 @@ void readeventfile(char *name)
 		event_file_lines = (char **)malloc(EVENT_FILE_MAX_SIZE);
 	}
 
-	event_file_len = 0;
+	//event_file_len = 0;
 	event_line_cnt = 0;
 	memset(event_file_blocks, -1, sizeof(int) * 256);
 
-	FILE *fr = fopen(name, "rb");
-
-	if(fr == NULL)
-		return;
-
-	event_file_len = fread(event_file, 1, EVENT_FILE_MAX_SIZE - 1, fr);
-
-	fclose(fr);
+    event_file = req;
+    event_file_len = req_sz;
 
 	event_file[event_file_len] = 0;
 }
@@ -199,7 +193,7 @@ apr_status_t readresponse(request_rec *r, char *buf, unsigned int length, unsign
 	return APR_SUCCESS;
 }
 
-int processRequest(char *config_file_path, char *event_file_path)
+int processRequest(char *config_file_path, char *raw_req)
 {
 	directory_config *config;
 	conn_rec *c;
@@ -208,7 +202,7 @@ int processRequest(char *config_file_path, char *event_file_path)
     int status = 0;
     
     config_file = config_file_path;
-    event_files[0] = event_file_path;
+    event_files[0] = raw_req;
     event_file_cnt = 1;
 	
     if(config_file == NULL)
@@ -233,6 +227,7 @@ int processRequest(char *config_file_path, char *event_file_path)
 	if(err != NULL)
 	{
 		printf("%s\n", err);
+        return 0;
 	}
 
 	modsecFinalizeConfig();
@@ -241,7 +236,7 @@ int processRequest(char *config_file_path, char *event_file_path)
 
 	for(int i = 0; i < event_file_cnt; i++)
 	{
-		readeventfile(event_files[i]);
+		readeventfile(event_files[i], strlen(event_files[i]));
 		parseeventfile();
 
 		c = modsecNewConnection();
@@ -369,8 +364,8 @@ int processRequest(char *config_file_path, char *event_file_path)
     return status;
 }
 
-JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrapFilterRequest
-  (JNIEnv *env, jobject obj, jstring config, jstring event)
+JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrapFilterRawRequest
+  (JNIEnv *env, jobject obj, jstring config, jstring rawRequest)
 {
     int status = 0;
     printf("Modsecurity plugin initiated\n");
@@ -380,7 +375,7 @@ JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrap
     req  = NULL; 
     
     copy_str(&conf , (env)->GetStringUTFChars(config, 0));
-    copy_str(&req  , (env)->GetStringUTFChars(event, 0));
+    copy_str(&req  , (env)->GetStringUTFChars(rawRequest, 0));
     
     if( conf == NULL ){
         printf("No config file provided\n");
@@ -398,13 +393,17 @@ JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrap
 
 int main(int argc, char *argv[])
 {
-    char *config , *event;
+    char *config , *raw_req, *event_file_path;
 
     copy_str(&config, "/home/varrunr/tomcat/demo/xssweb.conf");
-            
-    copy_str(&event,  "/home/varrunr/tomcat/demo/test2.dat");
+    copy_str(&event_file_path , "/home/varrunr/tomcat/demo/test2.dat");
+    
+    FILE *fp = fopen(event_file_path, "rb");
+    raw_req = (char *) malloc(EVENT_FILE_MAX_SIZE);
+    int file_len = fread(raw_req, 1, EVENT_FILE_MAX_SIZE - 1, fp);
+    raw_req[file_len] = 0;
 
-    processRequest( config , event );
-
+    int status = processRequest( config , raw_req );
+    printf("STATUS: %d\n",status);
     return 0;
 }

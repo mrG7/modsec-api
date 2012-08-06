@@ -2,20 +2,24 @@ package vulnapp.modsecurity.wrappers;
 
 public class ModSecurityWrapper {
 	
-	/* JNI Wrapper */
+	/* JNI Wrappers */
 	private native int 
 	wrapFilterRequest(String config, String event);
 	
+	private native int
+	wrapFilterRawRequest(String config, String rawRequest);
+	
 	public boolean 
 	processRequest( String configPath, 
-					String eventFilePath){
+					String rawRequest){
 		int status = 0;
 		
 		System.out.println("Setting config path: " + configPath);
-		System.out.println("Setting event path: " + eventFilePath);
+		System.out.println("Setting event path: " + rawRequest);
 		
 		// Process Request Here
-		status = new ModSecurityWrapper().wrapFilterRequest(configPath, eventFilePath);
+		status = new ModSecurityWrapper().wrapFilterRawRequest(configPath, 
+															rawRequest);
 		
 		System.out.println("Status:" + status);
 		
