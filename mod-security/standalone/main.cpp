@@ -21,6 +21,17 @@ int event_file_blocks[256];
 apr_status_t readbody(request_rec *r, char *buf, unsigned int length, unsigned int *readcnt, int *is_eos);
 apr_status_t readresponse(request_rec *r, char *buf, unsigned int length, unsigned int *readcnt, int *is_eos);
 
+void alloc_str(char **str, unsigned int size)
+{
+    *str = (char *) malloc( sizeof(char) * size );
+}
+
+void copy_str(char ** dest , const char *src)
+{
+    alloc_str( dest , strlen(src));
+	strcpy( *dest , src );
+}
+
 void readeventfile(char *name)
 {
 	if(event_file == NULL)
@@ -320,12 +331,12 @@ int main(int argc, char *argv[])
 
 		r->request_time = apr_time_now();
 
-		r->parsed_uri.scheme = "http";
+		copy_str(&(r->parsed_uri.scheme), "http");
 		r->parsed_uri.path = r->path_info;
 		r->parsed_uri.hostname = (char *)r->hostname;
 		r->parsed_uri.is_initialized = 1;
 		r->parsed_uri.port = 80;
-		r->parsed_uri.port_str = "80";
+		copy_str(&(r->parsed_uri.port_str), "80");
 		r->parsed_uri.query = r->args;
 		r->parsed_uri.dns_looked_up = 0;
 		r->parsed_uri.dns_resolved = 0;
