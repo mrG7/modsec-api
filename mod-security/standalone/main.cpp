@@ -2,8 +2,7 @@
 //#undef inline
 #define	inline inline
 
-#include <stdio.h>
-#include <conio.h>
+#include <cstdio>
 #include "api.h"
 
 
@@ -17,6 +16,10 @@ int event_line_cnt = 0;
 int event_file_blocks[256];
 
 #define	EVENT_FILE_MAX_SIZE		(16*1024*1024)
+
+
+apr_status_t readbody(request_rec *r, char *buf, unsigned int length, unsigned int *readcnt, int *is_eos);
+apr_status_t readresponse(request_rec *r, char *buf, unsigned int length, unsigned int *readcnt, int *is_eos);
 
 void readeventfile(char *name)
 {
@@ -185,7 +188,7 @@ apr_status_t readresponse(request_rec *r, char *buf, unsigned int length, unsign
 	return APR_SUCCESS;
 }
 
-void main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	directory_config *config;
 	conn_rec *c;
@@ -197,21 +200,21 @@ void main(int argc, char *argv[])
 	{
 		printf("Usage:\n");
 		printf("standalone.exe -c <config_file> <event_file1> [<event_file2> <event_file3> ...]\n");
-		return;
+		return 0;
 	}
 
 	modsecSetLogHook(NULL, log);
 
-	modsecSetReadBody(readbody);
-	modsecSetReadResponse(readresponse);
+	//modsecSetReadBody(readbody);
+	//modsecSetReadResponse(readresponse);
 
 	modsecInit();
 
 	modsecStartConfig();
 
 	config = modsecGetDefaultConfig();
-
-	const char * err = modsecProcessConfig(config, config_file);
+    	
+    const char * err = modsecProcessConfig(config, config_file);
 
 	if(err != NULL)
 	{
@@ -342,12 +345,12 @@ void main(int argc, char *argv[])
 		strcat(r->the_request, r->protocol);
 
 		apr_table_setn(r->subprocess_env, "UNIQUE_ID", "1");
-
+        
 		modsecProcessRequest(r);
-		modsecProcessResponse(r);
+        modsecProcessResponse(r);
 		modsecFinishRequest(r);
 	}
 
 	modsecTerminate();
-	getch();
+    return 0;
 }

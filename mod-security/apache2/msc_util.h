@@ -40,8 +40,14 @@ int DSOLOCAL inet_pton(int family, const char *src, void *dst);
 #endif
 #endif
 
+#ifdef __cplusplus
+extern "C"{
+#endif
 #if defined(WIN32) || !defined(HAVE_STRCASESTR)
-char DSOLOCAL *strcasestr(const char *haystack, const char *needle);
+//char DSOLOCAL *strcasestr(const char *haystack, const char *needle);
+#endif
+#ifdef __cplusplus
+}
 #endif
 
 int DSOLOCAL normalize_path_inplace(unsigned char *input, int len, int win, int *changed);
