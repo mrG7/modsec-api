@@ -120,8 +120,8 @@ AP_DECLARE(apr_status_t) ap_save_brigade(ap_filter_t *f,
 static apr_status_t error_bucket_read(apr_bucket *b, const char **str,
                                       apr_size_t *len, apr_read_type_e block)
 {
-    *str = NULL;
-    *len = 0;
+    *str = "Unknown error.";
+    *len = strlen(*str);
     return APR_SUCCESS;
 }
 

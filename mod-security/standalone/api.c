@@ -80,8 +80,8 @@ server_rec *modsecInit()
 
 	server = apr_palloc(pool, sizeof(server_rec));
 
-	server->addrs = apr_palloc(pool, sizeof(server->addrs));
-	server->addrs->host_addr = apr_palloc(pool, sizeof(server->addrs->host_addr));
+	server->addrs = apr_palloc(pool, sizeof(server_addr_rec));
+	server->addrs->host_addr = apr_palloc(pool, sizeof(apr_sockaddr_t));
 	server->addrs->host_addr->addr_str_len = 16;
 	server->addrs->host_addr->family = AF_INET;
 	server->addrs->host_addr->hostname = sa_name;
@@ -112,10 +112,14 @@ server_rec *modsecInit()
 	server->lookup_defaults = NULL;
 	server->module_config = NULL;
 	server->names = NULL;
-	server->path = "c:\\";
+#ifdef	WIN32
+	server->path = "c:\\inetpub\\wwwroot";
+#else
+	server->path = "/var/www";
+#endif
 	server->pathlen = strlen(server->path);
 	server->port = 80;
-	server->process = apr_palloc(pool, sizeof(server->process));
+	server->process = apr_palloc(pool, sizeof(process_rec));
 	server->process->argc = 1;
 	server->process->argv = &sa_name;
 	server->process->pconf = pool;
@@ -131,6 +135,9 @@ server_rec *modsecInit()
 
 	ap_scoreboard_image = (scoreboard *)apr_palloc(pool, sizeof(scoreboard));
 
+	// here we should probably fill scoreboard and later keep it updated somewhere
+	//
+	// ...
 
 	security2_module.module_index = 0;
 
@@ -211,6 +218,8 @@ void modsecStartConfig()
 	apr_pool_create(&ptemp, pool);
 
 	hookfn_pre_config(pool, pool, ptemp);
+
+	apr_pool_destroy(ptemp);
 }
 
 directory_config *modsecGetDefaultConfig()
@@ -220,13 +229,28 @@ directory_config *modsecGetDefaultConfig()
 
 const char *modsecProcessConfig(directory_config *config, const char *dir)
 {
-	return process_command_config(server, config, pool, pool, dir);
+	apr_pool_t *ptemp = NULL;
+	const char *err;
+
+	apr_pool_create(&ptemp, pool);
+
+	err = process_command_config(server, config, pool, ptemp, dir);
+
+	apr_pool_destroy(ptemp);
+
+	return err;
 }
 
 void modsecFinalizeConfig()
 {
-	hookfn_post_config(pool, pool, pool, server);
-	hookfn_post_config(pool, pool, pool, server);
+	apr_pool_t *ptemp = NULL;
+
+	apr_pool_create(&ptemp, pool);
+
+	hookfn_post_config(pool, pool, ptemp, server);
+	hookfn_post_config(pool, pool, ptemp, server);
+
+	apr_pool_destroy(ptemp);
 }
 
 void modsecInitProcess()
@@ -241,7 +265,7 @@ conn_rec *modsecNewConnection()
 
 	apr_pool_create(&pc, pool);
 
-	c = malloc(sizeof(conn_rec));//apr_palloc(pc, sizeof(conn_rec));
+	c = apr_palloc(pc, sizeof(conn_rec));
 
 	c->base_server = server;
 	c->id = 1;
@@ -376,11 +400,9 @@ int modsecProcessRequest(request_rec *r)
 
 	if(msr->stream_input_data != NULL && modsecWriteBody != NULL)
 	{
-		char *data = (char *)apr_palloc(r->pool, msr->stream_input_length);
-
-		memcpy(data, msr->stream_input_data, msr->stream_input_length);
-
-		modsecWriteBody(r, data, msr->stream_input_length);
+		// target is responsible for copying the data into correctly managed buffer
+		//
+		modsecWriteBody(r, msr->stream_input_data, msr->stream_input_length);
 
 		free(msr->stream_input_data);
 
