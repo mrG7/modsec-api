@@ -29,7 +29,6 @@ public class Login extends HttpServlet {
 			
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("dest.jsp");
 			dispatcher.forward(request,response);
-			//System.out.println(password);
 	}
 
 	/**

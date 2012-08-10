@@ -22,6 +22,8 @@ import java.net.URLEncoder;
  */
 public class ModSecurityFilter implements Filter {
 
+	private String configFilePath;
+			
     /**
      * Default constructor. 
      */
@@ -120,15 +122,13 @@ public class ModSecurityFilter implements Filter {
 				/*
 				 * Build Raw Request
 				 */
-				String rawRequest = buildRequest(httpreq);
-				System.out.println(rawRequest);
-				
+				String rawRequest = buildRequest(httpreq);				
 				/*
 				 * Invoke mod security rule set
 				 */
 				vulnapp.modsecurity.wrappers.ModSecurityWrapper waf = new vulnapp.modsecurity.wrappers.ModSecurityWrapper();
 
-				boolean requestAction = waf.processRequest("/home/varrunr/tomcat/demo/xssweb.conf", rawRequest);
+				boolean requestAction = waf.processRequest(getConfigFilePath() , rawRequest);
 				
 				if(requestAction){
 					System.out.println("Request Accepted");
@@ -138,11 +138,22 @@ public class ModSecurityFilter implements Filter {
 		}
 		chain.doFilter(request, response);
 	}
+	
+	public String getConfigFilePath() {
+		return configFilePath;
+	}
+
+	public void setConfigFilePath(String configFilePath) {
+		this.configFilePath = configFilePath;
+	}
+
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+		
+		setConfigFilePath(fConfig.getInitParameter("configFilePath"));
+		
 	}
 
 }
