@@ -21,6 +21,19 @@ int event_file_blocks[256];
 apr_status_t readbody(request_rec *r, char *buf, unsigned int length, unsigned int *readcnt, int *is_eos);
 apr_status_t readresponse(request_rec *r, char *buf, unsigned int length, unsigned int *readcnt, int *is_eos);
 
+void init_globals()
+{
+    config_file = NULL;
+    for(int i=0;i<1024;i++) event_files[i] = NULL;
+
+    event_file = NULL;
+    event_file_len = 0;
+    event_file_lines = NULL;
+    event_line_cnt = 0;
+    for(int i=0;i<256;i++)
+    event_file_blocks[i];
+}
+
 void alloc_str(char **str, unsigned int size)
 {
     *str = (char *) malloc( sizeof(char) * size );
@@ -214,7 +227,7 @@ int processRequest(char *config_file_path, char *raw_req)
 	modsecSetLogHook(NULL, log);
 
 	modsecSetReadBody(readbody);
-	modsecSetReadResponse(readresponse);
+	//modsecSetReadResponse(readresponse);
 
 	modsecInit();
 
@@ -258,13 +271,11 @@ int processRequest(char *config_file_path, char *raw_req)
 		char *method = event_file_lines[j];
 		char *url = strchr(method, 32);
 		char *proto = strchr(url + 1, 32);
-
 		if(url == NULL || proto == NULL)
 			continue;
 
 		*url++=0;
 		*proto++=0;
-
 #define	SETMETHOD(m) if(strcmp(method,#m) == 0){ r->method = method; r->method_number = M_##m; }
 
 		r->method = "INVALID";
@@ -367,27 +378,35 @@ int processRequest(char *config_file_path, char *raw_req)
 JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrapFilterRawRequest
   (JNIEnv *env, jobject obj, jstring config, jstring rawRequest)
 {
-    int status = 0;
+    jint status = 0;
     printf("Modsecurity plugin initiated\n");
 
-    char *conf, *req;
+    const char *conf, *req;
+    char *conf_copy, *req_copy;
+   
     conf = NULL; 
     req  = NULL; 
     
-    copy_str(&conf , (env)->GetStringUTFChars(config, 0));
-    copy_str(&req  , (env)->GetStringUTFChars(rawRequest, 0));
+    conf = (env)->GetStringUTFChars(config, NULL);
+    req  = (env)->GetStringUTFChars(rawRequest, NULL);
     
-    if( conf == NULL ){
+    copy_str(&conf_copy, conf);
+    copy_str(&req_copy, req);
+
+    (env)->ReleaseStringUTFChars(config, conf);
+    (env)->ReleaseStringUTFChars(rawRequest, req);
+
+    if(conf_copy == NULL){
         printf("No config file provided\n");
         return 0;
     }
     
-    if(req == NULL){
+    if(req_copy == NULL){
         printf("No request provided\b");
         return 0;
     }
-
-    status = processRequest(conf , req );
+ 
+    status = processRequest(conf_copy , req_copy );   
     return status;
 }
 
@@ -395,15 +414,20 @@ int main(int argc, char *argv[])
 {
     char *config , *raw_req, *event_file_path;
 
-    copy_str(&config, "/home/varrunr/tomcat/demo/xssweb.conf");
-    copy_str(&event_file_path , "/home/varrunr/tomcat/demo/test2.dat");
+    copy_str(&config, argv[1]);
+    copy_str(&event_file_path , argv[2]);
     
     FILE *fp = fopen(event_file_path, "rb");
-    raw_req = (char *) malloc(EVENT_FILE_MAX_SIZE);
+    
+	raw_req = (char *) malloc(EVENT_FILE_MAX_SIZE);
     int file_len = fread(raw_req, 1, EVENT_FILE_MAX_SIZE - 1, fp);
     raw_req[file_len] = 0;
 
     int status = processRequest( config , raw_req );
-    printf("STATUS: %d\n",status);
-    return 0;
+    
+	init_globals();
+
+    status = processRequest( config , raw_req );
+    
+	return 0;
 }

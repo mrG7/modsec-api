@@ -35,9 +35,13 @@ public class ProcessRequest {
 		String request = readStrFromFile(args[1]);
 		
 		ModSecurityWrapper waf = new ModSecurityWrapper();
-		
+		ModSecurityWrapper waf2 = new ModSecurityWrapper();
+
 		boolean status = waf.processRequest(args[0], request);
-		
+		//boolean status2 = waf2.processRequest(args[0], request);
+
+		//status = waf.processRequest(args[0], request);
+
 		if(status){
 			System.out.println("Accepted");
 		}

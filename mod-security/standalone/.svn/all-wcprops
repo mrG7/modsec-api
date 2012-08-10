@@ -3,53 +3,17 @@ svn:wc:ra_dav:version-url
 V 76
 /svnroot/mod-security/!svn/ver/1995/m2/experimental/2.7-iis-nginx/standalone
 END
-config.c
-K 25
-svn:wc:ra_dav:version-url
-V 85
-/svnroot/mod-security/!svn/ver/1989/m2/experimental/2.7-iis-nginx/standalone/config.c
-END
-server.c
-K 25
-svn:wc:ra_dav:version-url
-V 85
-/svnroot/mod-security/!svn/ver/1989/m2/experimental/2.7-iis-nginx/standalone/server.c
-END
-standalone.vcxproj.filters
-K 25
-svn:wc:ra_dav:version-url
-V 103
-/svnroot/mod-security/!svn/ver/1980/m2/experimental/2.7-iis-nginx/standalone/standalone.vcxproj.filters
-END
-filters.c
-K 25
-svn:wc:ra_dav:version-url
-V 86
-/svnroot/mod-security/!svn/ver/1993/m2/experimental/2.7-iis-nginx/standalone/filters.c
-END
-api.c
+api.h
 K 25
 svn:wc:ra_dav:version-url
 V 82
-/svnroot/mod-security/!svn/ver/1995/m2/experimental/2.7-iis-nginx/standalone/api.c
-END
-regex.c
-K 25
-svn:wc:ra_dav:version-url
-V 84
-/svnroot/mod-security/!svn/ver/1963/m2/experimental/2.7-iis-nginx/standalone/regex.c
+/svnroot/mod-security/!svn/ver/1994/m2/experimental/2.7-iis-nginx/standalone/api.h
 END
 standalone.vcxproj.user
 K 25
 svn:wc:ra_dav:version-url
 V 100
 /svnroot/mod-security/!svn/ver/1980/m2/experimental/2.7-iis-nginx/standalone/standalone.vcxproj.user
-END
-api.h
-K 25
-svn:wc:ra_dav:version-url
-V 82
-/svnroot/mod-security/!svn/ver/1994/m2/experimental/2.7-iis-nginx/standalone/api.h
 END
 hooks.c
 K 25
@@ -98,4 +62,40 @@ K 25
 svn:wc:ra_dav:version-url
 V 91
 /svnroot/mod-security/!svn/ver/1963/m2/experimental/2.7-iis-nginx/standalone/standalone.sln
+END
+config.c
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/mod-security/!svn/ver/1989/m2/experimental/2.7-iis-nginx/standalone/config.c
+END
+server.c
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/mod-security/!svn/ver/2013/m2/experimental/2.7-iis-nginx/standalone/server.c
+END
+standalone.vcxproj.filters
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/mod-security/!svn/ver/1980/m2/experimental/2.7-iis-nginx/standalone/standalone.vcxproj.filters
+END
+filters.c
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/mod-security/!svn/ver/1993/m2/experimental/2.7-iis-nginx/standalone/filters.c
+END
+api.c
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/mod-security/!svn/ver/1995/m2/experimental/2.7-iis-nginx/standalone/api.c
+END
+regex.c
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/mod-security/!svn/ver/1963/m2/experimental/2.7-iis-nginx/standalone/regex.c
 END

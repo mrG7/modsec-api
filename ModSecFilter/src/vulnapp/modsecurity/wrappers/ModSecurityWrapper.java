@@ -6,17 +6,14 @@ public class ModSecurityWrapper {
 	private native int 
 	wrapFilterRequest(String config, String event);
 	
-	private static native int
+	private native int
 	wrapFilterRawRequest(String config, String rawRequest);
 	
 	public boolean 
 	processRequest( String configPath, 
 					String rawRequest){
 		int status = 0;
-		
-		//System.out.println("Setting config path: " + configPath);
-		//System.out.println("Setting event path: " + rawRequest);
-		
+				
 		// Process Request Here
 		status = new ModSecurityWrapper().wrapFilterRawRequest(configPath, 
 															rawRequest);
