@@ -4,25 +4,37 @@ public class ModSecurityWrapper {
 	
 	/* JNI Wrappers */
 	private native int 
-	wrapFilterRequest(String config, String event);
+	wrapInitModSecEngine(String config);
 	
 	private native int
 	wrapFilterRawRequest(String config, String rawRequest);
 	
+	private native int
+	wrapTerminateModSecEngine();
+	
 	public boolean 
-	processRequest( String configPath, 
-					String rawRequest){
+	processRequest( String configPath, String rawRequest){
 		int status = 0;
 				
-		// Process Request Here
-		status = new ModSecurityWrapper().wrapFilterRawRequest(configPath, 
-															rawRequest);
+		status = this.wrapFilterRawRequest(configPath, rawRequest);
 		
 		System.out.println("Status:" + status);
 		
 		if( status == Constants.DECLINED ) return true;
 
 		return false;
+	}
+	
+	public void
+	startEngine(String config)
+	{
+		this.wrapInitModSecEngine(config);
+	}
+	
+	public void
+	stopEngine()
+	{
+		this.wrapTerminateModSecEngine();
 	}
 	
 	static{

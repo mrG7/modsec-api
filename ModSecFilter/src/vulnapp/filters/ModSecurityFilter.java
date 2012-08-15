@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.filters.Constants;
 
+import vulnapp.modsecurity.wrappers.ModSecurityWrapper;
+
 import java.net.URLEncoder;
 
 /**
@@ -23,25 +25,32 @@ import java.net.URLEncoder;
 public class ModSecurityFilter implements Filter {
 
 	private String configFilePath;
-			
+	private boolean ModSecEngineRunning;
+	private ModSecurityWrapper waf;
     /**
      * Default constructor. 
      */
     public ModSecurityFilter() {
-        // TODO Auto-generated constructor stub
+    	ModSecEngineRunning = false;
+    	configFilePath = "";
     }
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
+		System.out.println("Destroying filter");
+		if(ModSecEngineRunning){
+			waf.stopEngine();
+		}
 	}
 	
-	private String buildRequest(HttpServletRequest httpreq){
+	private String buildRequest(HttpServletRequest httpreq)
+	{
 		/**
 		 * Initializing String
 		 */
+		
 		StringBuilder rawHttpRequest = new StringBuilder(vulnapp.modsecurity.wrappers.Constants.MODSEC_HEADERS_TITLE);
 		
 		/**
@@ -49,7 +58,7 @@ public class ModSecurityFilter implements Filter {
 		 */
 		
 		rawHttpRequest.append(httpreq.getMethod())								
-						.append(" ").append(httpreq.getRequestURI());
+					  .append(" ").append(httpreq.getRequestURI());
 		
 		if(httpreq.getQueryString() != null)
 		{
@@ -105,7 +114,9 @@ public class ModSecurityFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
+						throws IOException, ServletException {
 		
 		HttpServletRequest httpreq = (HttpServletRequest) request;
 		HttpServletResponse httpresp = (HttpServletResponse) response;
@@ -122,18 +133,37 @@ public class ModSecurityFilter implements Filter {
 				/*
 				 * Build Raw Request
 				 */
-				String rawRequest = buildRequest(httpreq);				
+				
+				String rawRequest = buildRequest(httpreq);	
+				System.out.println(rawRequest);
+				
 				/*
-				 * Invoke mod security rule set
+				 * Start Mod Security Engine
 				 */
-				vulnapp.modsecurity.wrappers.ModSecurityWrapper waf = new vulnapp.modsecurity.wrappers.ModSecurityWrapper();
-
-				boolean requestAction = waf.processRequest(getConfigFilePath() , rawRequest);
+				
+			    waf = new ModSecurityWrapper();
+				if(!ModSecEngineRunning){
+				    System.out.println("Starting Engine");
+					waf.startEngine(configFilePath);
+					ModSecEngineRunning = true;
+				}
+				
+				/*
+				 * Processing Request
+				 */
+				
+				boolean requestAction = true;
+				System.out.print("Processing Request\n");
+				requestAction = waf.processRequest(getConfigFilePath() , rawRequest);
 				
 				if(requestAction){
 					System.out.println("Request Accepted");
+					
 				}
-				else System.out.println("Request Denied");
+				else{
+					System.out.println("Request Denied");
+				}
+
 			}
 		}
 		chain.doFilter(request, response);
@@ -150,8 +180,10 @@ public class ModSecurityFilter implements Filter {
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
+	
 	public void init(FilterConfig fConfig) throws ServletException {
-		
+	
+		System.out.println("Initializing Filter");
 		setConfigFilePath(fConfig.getInitParameter("configFilePath"));
 		
 	}

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/ModSecFilter/login" method="POST">
+<form action="/ModSecFilter/login" method="GET">
 <input type="text" name="username">
 <input type="text" name="password">
 <input type="submit" name="submit" value="yes">
