@@ -9,11 +9,11 @@ extern "C" {
 #endif
 /*
  * Class:     vulnapp_modsecurity_wrappers_ModSecurityWrapper
- * Method:    wrapFilterRequest
- * Signature: (Ljava/lang/String;Ljava/lang/String;)I
+ * Method:    wrapInitModSecEngine
+ * Signature: (Ljava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrapFilterRequest
-  (JNIEnv *, jobject, jstring, jstring);
+JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrapInitModSecEngine
+  (JNIEnv *, jobject, jstring);
 
 /*
  * Class:     vulnapp_modsecurity_wrappers_ModSecurityWrapper
@@ -22,6 +22,14 @@ JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrap
  */
 JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrapFilterRawRequest
   (JNIEnv *, jobject, jstring, jstring);
+
+/*
+ * Class:     vulnapp_modsecurity_wrappers_ModSecurityWrapper
+ * Method:    wrapTerminateModSecEngine
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrapTerminateModSecEngine
+  (JNIEnv *, jobject);
 
 #ifdef __cplusplus
 }

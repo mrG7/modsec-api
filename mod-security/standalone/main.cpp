@@ -15,24 +15,15 @@ char **event_file_lines;
 int event_line_cnt = 0;
 int event_file_blocks[256];
 
-#define	EVENT_FILE_MAX_SIZE		(16*1024*1024)
+unsigned int bodypos = 0;
+unsigned int responsepos = 0;
 
+directory_config *dir_config;
+
+#define	EVENT_FILE_MAX_SIZE		(16*1024*1024)
 
 apr_status_t readbody(request_rec *r, char *buf, unsigned int length, unsigned int *readcnt, int *is_eos);
 apr_status_t readresponse(request_rec *r, char *buf, unsigned int length, unsigned int *readcnt, int *is_eos);
-
-void init_globals()
-{
-    config_file = NULL;
-    for(int i=0;i<1024;i++) event_files[i] = NULL;
-
-    event_file = NULL;
-    event_file_len = 0;
-    event_file_lines = NULL;
-    event_line_cnt = 0;
-    for(int i=0;i<256;i++)
-    event_file_blocks[i];
-}
 
 void alloc_str(char **str, unsigned int size)
 {
@@ -49,11 +40,10 @@ void readeventfile(char *req , unsigned int req_sz)
 {
 	if(event_file == NULL)
 	{
-		event_file = (char *)malloc(EVENT_FILE_MAX_SIZE);
+		event_file = req;
 		event_file_lines = (char **)malloc(EVENT_FILE_MAX_SIZE);
 	}
 
-	//event_file_len = 0;
 	event_line_cnt = 0;
 	memset(event_file_blocks, -1, sizeof(int) * 256);
 
@@ -61,6 +51,18 @@ void readeventfile(char *req , unsigned int req_sz)
     event_file_len = req_sz;
 
 	event_file[event_file_len] = 0;
+}
+
+void garbageCollect()
+{
+    free(event_file);
+    free(event_file_lines);
+    event_file = NULL;
+    event_file_len = 0;
+    event_file_lines = NULL;
+    event_line_cnt = 0;
+    bodypos = 0;
+    responsepos = 0;
 }
 
 void parseeventfile()
@@ -89,7 +91,8 @@ void parseeventfile()
 		if(l != 14)
 			continue;
 
-		if(event_file_lines[i][0] != '-' || event_file_lines[i][1] != '-' || event_file_lines[i][l-2] != '-' || event_file_lines[i][l-1] != '-')
+		if( event_file_lines[i][0] != '-' || event_file_lines[i][1] != '-' || 
+            event_file_lines[i][l-2] != '-' || event_file_lines[i][l-1] != '-')
 			continue;
 
 		char blk =  event_file_lines[i][l-3];
@@ -98,41 +101,10 @@ void parseeventfile()
 	}
 }
 
-void parseargs(int argc, char *argv[])
-{
-	int i = 1;
-
-	event_file_cnt = 0;
-
-	while(i < argc)
-	{
-		if(argv[i][0] == '-')
-		{
-			if(argv[i][1] == 'c' && i < argc - 1)
-			{
-				config_file = argv[i + 1];
-				i += 2;
-				continue;
-			}
-			i++;
-			continue;
-		}
-		if(event_file_cnt == 1024)
-		{
-			fprintf(stderr, "Too many input files! (limit 1024)\n");
-			break;
-		}
-
-		event_files[event_file_cnt++] = argv[i++];
-	}
-}
-
 void log(void *obj, int level, char *str)
 {
 	printf("%s\n", str);
 }
-
-unsigned int bodypos = 0;
 
 apr_status_t readbody(request_rec *r, char *buf, unsigned int length, unsigned int *readcnt, int *is_eos)
 {
@@ -169,8 +141,6 @@ apr_status_t readbody(request_rec *r, char *buf, unsigned int length, unsigned i
 	return APR_SUCCESS;
 }
 
-unsigned int responsepos = 0;
-
 apr_status_t readresponse(request_rec *r, char *buf, unsigned int length, unsigned int *readcnt, int *is_eos)
 {
 	int j = event_file_blocks['G'];
@@ -206,18 +176,10 @@ apr_status_t readresponse(request_rec *r, char *buf, unsigned int length, unsign
 	return APR_SUCCESS;
 }
 
-int processRequest(char *config_file_path, char *raw_req)
-{
-	directory_config *config;
-	conn_rec *c;
-	request_rec *r;
-    
+int initModSecEngine(char *config_file)
+{    
     int status = 0;
     
-    config_file = config_file_path;
-    event_files[0] = raw_req;
-    event_file_cnt = 1;
-	
     if(config_file == NULL)
 	{
 		printf("No config file provided\n");
@@ -227,15 +189,15 @@ int processRequest(char *config_file_path, char *raw_req)
 	modsecSetLogHook(NULL, log);
 
 	modsecSetReadBody(readbody);
-	//modsecSetReadResponse(readresponse);
+	modsecSetReadResponse(readresponse);
 
 	modsecInit();
 
 	modsecStartConfig();
 
-	config = modsecGetDefaultConfig();
+	dir_config = modsecGetDefaultConfig();
     	
-    const char * err = modsecProcessConfig(config, config_file);
+    const char * err = modsecProcessConfig(dir_config, config_file);
 
 	if(err != NULL)
 	{
@@ -247,7 +209,26 @@ int processRequest(char *config_file_path, char *raw_req)
 
 	modsecInitProcess();
 
-	for(int i = 0; i < event_file_cnt; i++)
+    return 1;
+}
+
+void terminateModSecEngine()
+{
+	modsecTerminate();
+    return;
+}
+
+int processRequest(char *raw_req)
+{
+    printf("ModSecurity is processing request(C)\n");
+    int status = 0;
+    copy_str(&event_files[0], raw_req);
+    event_file_cnt = 1;
+    
+    conn_rec *c = NULL;
+    request_rec *r = NULL;
+
+    for(int i = 0; i < event_file_cnt; i++)
 	{
 		readeventfile(event_files[i], strlen(event_files[i]));
 		parseeventfile();
@@ -255,11 +236,11 @@ int processRequest(char *config_file_path, char *raw_req)
 		c = modsecNewConnection();
 
 		modsecProcessConnection(c);
-
-		r = modsecNewRequest(c, config);
+        
+		r = modsecNewRequest(c, dir_config);
 
 		int j = event_file_blocks['B'];
-
+        
 		if(j < 0)
 			continue;
 
@@ -267,8 +248,8 @@ int processRequest(char *config_file_path, char *raw_req)
 
 		if(event_file_lines[j][0] == 0)
 			continue;
-
-		char *method = event_file_lines[j];
+		
+        char *method = event_file_lines[j];
 		char *url = strchr(method, 32);
 		char *proto = strchr(url + 1, 32);
 		if(url == NULL || proto == NULL)
@@ -368,11 +349,32 @@ int processRequest(char *config_file_path, char *raw_req)
         
 		status = modsecProcessRequest(r);
         modsecProcessResponse(r);
-		modsecFinishRequest(r);
+        modsecFinishRequest(r);
 	}
-
-	modsecTerminate();
     return status;
+}
+
+JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrapInitModSecEngine
+  (JNIEnv *jenv, jobject obj, jstring config)
+{
+    
+    printf("Starting mod security Engine(C)I\n");
+    const char *conf;
+    char *conf_copy;
+    
+    conf = (jenv)->GetStringUTFChars(config, NULL);
+    copy_str(&conf_copy, conf);
+
+    initModSecEngine(conf_copy);
+    
+    return 0;
+}
+
+JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrapTerminateModSecEngine
+  (JNIEnv *env, jobject obj)
+{
+    terminateModSecEngine();
+    return 0;
 }
 
 JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrapFilterRawRequest
@@ -395,20 +397,31 @@ JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrap
 
     (env)->ReleaseStringUTFChars(config, conf);
     (env)->ReleaseStringUTFChars(rawRequest, req);
-
-    if(conf_copy == NULL){
-        printf("No config file provided\n");
-        return 0;
-    }
     
     if(req_copy == NULL){
         printf("No request provided\b");
         return 0;
     }
  
-    status = processRequest(conf_copy , req_copy );   
+    status = processRequest( req_copy );
+
+    garbageCollect();
+    
     return status;
 }
+
+/*
+void JNI_OnUnload(JavaVM *vm, void *reserved)
+{
+    printf("Unloading JNI...\n");
+}
+*/
+/*
+jint JNI_OnLoad(JavaVM *vm, void *reserved)
+{
+    return JNI_VERSION_1_6; 
+}
+*/
 
 int main(int argc, char *argv[])
 {
@@ -423,11 +436,11 @@ int main(int argc, char *argv[])
     int file_len = fread(raw_req, 1, EVENT_FILE_MAX_SIZE - 1, fp);
     raw_req[file_len] = 0;
 
-    int status = processRequest( config , raw_req );
+    initModSecEngine(config);    
     
-	init_globals();
-
-    status = processRequest( config , raw_req );
-    
+    int status = processRequest(raw_req);
+    printf("status:%d\n",status);
+	
+    terminateModSecEngine();
 	return 0;
 }
