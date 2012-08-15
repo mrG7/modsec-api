@@ -47,10 +47,12 @@ RegisterModule(
     }*/
 
     // step 1: save the IHttpServer and the module context id for future use
+	//
     g_pModuleContext = pModuleInfo->GetId();
     g_pHttpServer = pHttpServer;
 
     // step 2: create the module factory
+	//
     pFactory = new CMyHttpModuleFactory();
     if ( pFactory == NULL )
     {
@@ -59,9 +61,9 @@ RegisterModule(
     }
 
     // step 3: register for server events
-    // TODO: register for more server events here
+	//
     hr = pModuleInfo->SetRequestNotifications( pFactory, /* module factory */
-                                               RQ_ACQUIRE_REQUEST_STATE | RQ_BEGIN_REQUEST | RQ_SEND_RESPONSE /* server event mask */,
+                                               RQ_BEGIN_REQUEST | RQ_SEND_RESPONSE /* server event mask */,
                                                RQ_END_REQUEST /* server post event mask */);
     if ( FAILED( hr ) )
     {

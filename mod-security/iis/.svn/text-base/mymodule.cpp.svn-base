@@ -202,34 +202,34 @@ REQUEST_STORED_CONTEXT *RetrieveIISContext(request_rec *r)
     return NULL;
 }
 
-//  Implementation of the OnAcquireRequestState method
-REQUEST_NOTIFICATION_STATUS
-CMyHttpModule::OnAcquireRequestState(
-    IN IHttpContext *                       pHttpContext,
-    IN OUT IHttpEventProvider *             pProvider
-)
-{
-    HRESULT                         hr = S_OK;
-
-	// TODO: implement the AcquireRequestState module functionality
-
-Finished:
-
-    if ( FAILED( hr )  )
-    {
-        return RQ_NOTIFICATION_FINISH_REQUEST;
-    }
-    else
-    {
-        return RQ_NOTIFICATION_CONTINUE;
-    }
-}
-
 HRESULT CMyHttpModule::ReadFileChunk(HTTP_DATA_CHUNK *chunk, char *buf)
 {
     OVERLAPPED ovl;
     DWORD dwDataStartOffset;
     DWORD bytesTotal = 0;
+	BYTE *	pIoBuffer = NULL;
+	HANDLE	hIoEvent = INVALID_HANDLE_VALUE;
+	HRESULT hr = S_OK;
+
+    pIoBuffer = (BYTE *)VirtualAlloc(NULL,
+                                        1,
+                                        MEM_COMMIT | MEM_RESERVE,
+                                        PAGE_READWRITE);
+    if (pIoBuffer == NULL)
+    {
+        hr = HRESULT_FROM_WIN32(GetLastError());
+		goto Done;
+    }
+
+    hIoEvent = CreateEvent(NULL,  // security attr
+                                FALSE, // manual reset
+                                FALSE, // initial state
+                                NULL); // name
+    if (hIoEvent == NULL)
+    {
+        hr = HRESULT_FROM_WIN32(GetLastError());
+		goto Done;
+    }
 
 	while(bytesTotal < chunk->FromFileHandle.ByteRange.Length.QuadPart)
 	{
@@ -238,14 +238,14 @@ HRESULT CMyHttpModule::ReadFileChunk(HTTP_DATA_CHUNK *chunk, char *buf)
 		ULONGLONG offset = chunk->FromFileHandle.ByteRange.StartingOffset.QuadPart + bytesTotal;
 
 		ZeroMemory(&ovl, sizeof ovl);
-		ovl.hEvent     = m_hIoEvent;
+		ovl.hEvent     = hIoEvent;
 		ovl.Offset = (DWORD)offset;
 		dwDataStartOffset = ovl.Offset & (m_dwPageSize - 1);
 		ovl.Offset &= ~(m_dwPageSize - 1);
 		ovl.OffsetHigh = offset >> 32;
 
 		if (!ReadFile(chunk->FromFileHandle.FileHandle,
-					  m_pIoBuffer,
+					  pIoBuffer,
 					  m_dwPageSize,
 					  &bytesRead,
 					  &ovl))
@@ -276,7 +276,8 @@ HRESULT CMyHttpModule::ReadFileChunk(HTTP_DATA_CHUNK *chunk, char *buf)
 						break;
 
 					default:
-						return HRESULT_FROM_WIN32(dwErr);
+						hr = HRESULT_FROM_WIN32(dwErr);
+						goto Done;
 					}
 				}
 
@@ -287,7 +288,8 @@ HRESULT CMyHttpModule::ReadFileChunk(HTTP_DATA_CHUNK *chunk, char *buf)
 				break;
 
 			default:
-				return HRESULT_FROM_WIN32(dwErr);
+				hr = HRESULT_FROM_WIN32(dwErr);
+				goto Done;
 			}
 		}
 
@@ -298,7 +300,7 @@ HRESULT CMyHttpModule::ReadFileChunk(HTTP_DATA_CHUNK *chunk, char *buf)
 			bytesRead = (DWORD)chunk->FromFileHandle.ByteRange.Length.QuadPart;
 		}
 
-		memcpy(buf, m_pIoBuffer, bytesRead);
+		memcpy(buf, pIoBuffer, bytesRead);
 
 		buf += bytesRead;
 		bytesTotal += bytesRead;
@@ -307,7 +309,18 @@ HRESULT CMyHttpModule::ReadFileChunk(HTTP_DATA_CHUNK *chunk, char *buf)
 			chunk->FromFileHandle.ByteRange.Length.QuadPart = bytesTotal;
 	}
 
-    return S_OK;
+Done:
+	if(NULL != pIoBuffer)
+	{
+		VirtualFree(pIoBuffer, 0, MEM_RELEASE);
+	}
+
+	if(INVALID_HANDLE_VALUE != hIoEvent)
+	{
+		CloseHandle(hIoEvent);
+	}
+
+	return hr;
 }
 
 REQUEST_NOTIFICATION_STATUS
@@ -322,12 +335,8 @@ CMyHttpModule::OnSendResponse(
 
 	if(rsc == NULL || rsc->m_pRequestRec == NULL || rsc->m_pResponseBuffer != NULL)
 	{
-		return RQ_NOTIFICATION_CONTINUE;
+		goto Exit;
 	}
-
-	// here we must add handling of chunked response
-	// apparently IIS 7 calls this handler once per chunk
-	// see: http://stackoverflow.com/questions/4385249/how-to-buffer-and-process-chunked-data-before-sending-headers-in-iis7-native-mod
 
     HRESULT hr = S_OK;
 	IHttpResponse *pHttpResponse = NULL;
@@ -343,11 +352,25 @@ CMyHttpModule::OnSendResponse(
 	pHttpResponse = pHttpContext->GetResponse();
 	pRawHttpResponse = pHttpResponse->GetRawHttpResponse();
 
+	// here we must add handling of chunked response
+	// apparently IIS 7 calls this handler once per chunk
+	// see: http://stackoverflow.com/questions/4385249/how-to-buffer-and-process-chunked-data-before-sending-headers-in-iis7-native-mod
+
+	if(pRawHttpResponse->EntityChunkCount == 0)
+		goto Exit;
+
 	// here we must transfer response headers
 	//
 	USHORT ctcch = 0;
 	char *ct = (char *)pHttpResponse->GetHeader(HttpHeaderContentType, &ctcch);
 	char *ctz = ZeroTerminate(ct, ctcch, r->pool);
+
+	// assume HTML if content type not set
+	// without this output filter would not buffer response and processing would hang
+	// this needs further investigation (it did not repro on debug build)
+	//
+	if(ctz[0] == 0)
+		ctz = "text/html";
 
 	r->content_type = ctz;
 
@@ -520,7 +543,7 @@ CMyHttpModule::OnSendResponse(
 
          hr = StringCchPrintfA(
                     szLength, 
-                    sizeof(szLength) / sizeof(CHAR) - 1, "%I64d", 
+                    sizeof(szLength) / sizeof(CHAR) - 1, "%d", 
                     ulTotalLength);
 
         if(FAILED(hr))
@@ -552,12 +575,15 @@ Finished:
 		pHttpContext->GetResponse()->SetStatus(status, "ModSecurity Action");
 		pHttpContext->SetRequestHandled();
 
+		rsc->FinishRequest();
+		
 		return RQ_NOTIFICATION_FINISH_REQUEST;
 	}
-
+Exit:
 	// temporary hack, in reality OnSendRequest theoretically could possibly come before OnEndRequest
 	//
-	rsc->FinishRequest();
+	if(rsc != NULL)
+		rsc->FinishRequest();
 
 	return RQ_NOTIFICATION_CONTINUE;
 }
@@ -624,7 +650,11 @@ CMyHttpModule::OnBeginRequest(
         goto Finished;
 	}
 
-	if(pConfig->m_Config == NULL)
+	// every 3 seconds we check for changes in config file
+	//
+	DWORD ctime = GetTickCount();
+
+	if(pConfig->m_Config == NULL || (ctime - pConfig->m_dwLastCheck) > 3000)
 	{
 		char *path;
 		USHORT pathlen;
@@ -637,19 +667,33 @@ CMyHttpModule::OnBeginRequest(
 			goto Finished;
 		}
 
-		pConfig->m_Config = modsecGetDefaultConfig();
+		WIN32_FILE_ATTRIBUTE_DATA fdata;
+		BOOL ret;
 
-		if(path[0] != 0)
+		ret = GetFileAttributesEx(path, GetFileExInfoStandard, &fdata);
+
+		pConfig->m_dwLastCheck = ctime;
+
+		if(ret == 0 || pConfig->m_LastChange.dwLowDateTime != fdata.ftLastWriteTime.dwLowDateTime ||
+			pConfig->m_LastChange.dwHighDateTime != fdata.ftLastWriteTime.dwHighDateTime)
 		{
-			const char * err = modsecProcessConfig((directory_config *)pConfig->m_Config, path);
+			pConfig->m_LastChange.dwLowDateTime = fdata.ftLastWriteTime.dwLowDateTime;
+			pConfig->m_LastChange.dwHighDateTime = fdata.ftLastWriteTime.dwHighDateTime;
 
-			if(err != NULL)
+			pConfig->m_Config = modsecGetDefaultConfig();
+
+			if(path[0] != 0)
 			{
-				WriteEventViewerLog(err, EVENTLOG_ERROR_TYPE);
-			}
-		}
+				const char * err = modsecProcessConfig((directory_config *)pConfig->m_Config, path);
 
-		delete path;
+				if(err != NULL)
+				{
+					WriteEventViewerLog(err, EVENTLOG_ERROR_TYPE);
+				}
+			}
+
+			delete path;
+		}
 	}
 
 	conn_rec *c;
@@ -960,11 +1004,12 @@ apr_status_t WriteBodyCallback(request_rec *r, char *buf, unsigned int length)
 
     HRESULT hr = StringCchPrintfA(
             szLength, 
-            sizeof(szLength) / sizeof(CHAR) - 1, "%I64d", 
+            sizeof(szLength) / sizeof(CHAR) - 1, "%d", 
             length);
 
     if(FAILED(hr))
     {
+		// not possible
     }
 
     hr = pHttpRequest->SetHeader(
@@ -975,6 +1020,7 @@ apr_status_t WriteBodyCallback(request_rec *r, char *buf, unsigned int length)
 
     if(FAILED(hr))
     {
+		// possible, but there's nothing we can do
     }
 
 	// since we clean the APR pool at the end of OnSendRequest, we must get IIS-managed memory chunk
@@ -1046,11 +1092,12 @@ apr_status_t WriteResponseCallback(request_rec *r, char *buf, unsigned int lengt
 
     HRESULT hr = StringCchPrintfA(
             szLength, 
-            sizeof(szLength) / sizeof(CHAR) - 1, "%I64d", 
+            sizeof(szLength) / sizeof(CHAR) - 1, "%d", 
             length);
 
     if(FAILED(hr))
     {
+		// not possible
     }
 
     hr = pHttpResponse->SetHeader(
@@ -1061,6 +1108,7 @@ apr_status_t WriteResponseCallback(request_rec *r, char *buf, unsigned int lengt
 
     if(FAILED(hr))
     {
+		// possible, but there's nothing we can do
     }
 
 	pHttpResponse->WriteEntityChunkByReference(pDataChunk);
@@ -1072,24 +1120,7 @@ apr_status_t WriteResponseCallback(request_rec *r, char *buf, unsigned int lengt
 CMyHttpModule::CMyHttpModule()
 {
     // Open a handle to the Event Viewer.
-    m_hEventLog = RegisterEventSource( NULL,"ModSecurity" );
-
-    m_pIoBuffer = (BYTE *)VirtualAlloc(NULL,
-                                        1,
-                                        MEM_COMMIT | MEM_RESERVE,
-                                        PAGE_READWRITE);
-    if (m_pIoBuffer == NULL)
-    {
-    }
-
-    m_hIoEvent = CreateEvent(NULL,  // security attr
-                                FALSE, // manual reset
-                                FALSE, // initial state
-                                NULL); // name
-    if (m_hIoEvent == NULL)
-    {
-        //return HRESULT_FROM_WIN32(GetLastError());
-    }
+    m_hEventLog = RegisterEventSource( NULL, "ModSecurity" );
 
     SYSTEM_INFO         sysInfo;
 
@@ -1120,7 +1151,10 @@ CMyHttpModule::CMyHttpModule()
 
 CMyHttpModule::~CMyHttpModule()
 {
-	modsecTerminate();
+	// ModSecurity registers APR pool cleanups, which interfere with APR pool tear down process
+	// this causes crashes and since we are exiting the process here, so this is a temporary solution
+	//
+	//modsecTerminate();
 
 	//WriteEventViewerLog("Module deleted.");
 
@@ -1131,17 +1165,6 @@ CMyHttpModule::~CMyHttpModule()
         DeregisterEventSource( m_hEventLog );
         m_hEventLog = NULL;
     }
-
-	if(NULL != m_pIoBuffer)
-	{
-		VirtualFree(m_pIoBuffer, 0, MEM_RELEASE);
-		m_pIoBuffer = NULL;
-	}
-
-	if(INVALID_HANDLE_VALUE != m_hIoEvent)
-	{
-		CloseHandle(m_hIoEvent);
-	}
 }
 
 void CMyHttpModule::Dispose()

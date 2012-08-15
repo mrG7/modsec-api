@@ -26,9 +26,111 @@ gregwroblewski
 
 9017d574-64ec-4062-9424-5e00b32a252b
 
+mymodule.h
+file
+2018
+
+
+
+2012-08-11T01:08:57.192454Z
+e1845dae955cb12877647c328b18bdd2
+2012-08-12T07:15:27.815427Z
+2018
+gregwroblewski
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+942
+
+ModSecurityIIS.vcxproj.user
+file
+2018
+
+
+
+2012-07-23T16:40:02.236745Z
+02816bcc1da4abf7ab716035d355eb7c
+2012-06-25T22:12:29.429483Z
+1976
+gregwroblewski
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+143
+
+mod_security2.exp
+file
+2018
+
+
+
+2012-08-11T01:08:18.000452Z
+c22ac948f23da292e149013215fe0419
+2012-08-07T22:55:46.044139Z
+2013
+gregwroblewski
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1024
+
 readme.htm
 file
-
+2018
 
 
 
@@ -62,7 +164,7 @@ gregwroblewski
 
 mymodule.def
 file
-
+2018
 
 
 
@@ -96,7 +198,7 @@ gregwroblewski
 
 ModSecurityIIS.dll.manifest
 file
-
+2018
 
 
 
@@ -130,14 +232,14 @@ gregwroblewski
 
 moduleconfig.cpp
 file
+2018
 
 
 
-
-2012-07-23T16:40:02.240745Z
-2a9732c7e96667b0cafc56bab2428067
-2012-06-25T22:12:29.429483Z
-1976
+2012-08-11T01:08:43.356453Z
+359938107408ede6d3b587268ff92934
+2012-08-07T22:55:46.044139Z
+2013
 gregwroblewski
 
 
@@ -160,18 +262,18 @@ gregwroblewski
 
 
 
-15727
+15818
 
 mod_security2.lib
 file
+2018
 
 
 
-
-2012-07-23T16:40:02.240745Z
-391795d2f416c42382703fe143eb0986
-2012-07-20T08:11:55.314689Z
-1993
+2012-08-11T01:08:20.768452Z
+ccc73096c7849d7a2f5e6e85c8e9d65b
+2012-08-07T22:55:46.044139Z
+2013
 gregwroblewski
 has-props
 
@@ -194,18 +296,18 @@ has-props
 
 
 
-2350
+2366
 
 moduleconfig.h
 file
+2018
 
 
 
-
-2012-07-23T16:40:02.240745Z
-f11c3a339da158f649c4c526503997da
-2012-06-25T22:12:29.429483Z
-1976
+2012-08-11T01:08:46.132454Z
+66f22b3e552ace217fc72c40a0f1b983
+2012-08-07T22:55:46.044139Z
+2013
 gregwroblewski
 
 
@@ -228,18 +330,18 @@ gregwroblewski
 
 
 
-2381
+2434
 
 main.cpp
 file
+2018
 
 
 
-
-2012-07-23T16:40:02.240745Z
-9d2cf234c255bc2a47d94d424daf2c92
-2012-07-22T07:43:08.100775Z
-1994
+2012-08-11T01:08:12.340452Z
+ad79d3071221c46e6abebf93087a66d4
+2012-08-12T07:15:27.815427Z
+2018
 gregwroblewski
 
 
@@ -262,18 +364,18 @@ gregwroblewski
 
 
 
-2650
+2587
 
 ModSecurityIIS.vcxproj
 file
+2018
 
 
 
-
-2012-07-23T16:40:02.240745Z
-d8150f0fd04bb7fc5091fa4a52e02546
-2012-07-11T20:39:40.464187Z
-1989
+2012-08-11T01:08:32.344453Z
+f6f1adea43885015c947f7ad5c796ae4
+2012-08-12T07:15:27.815427Z
+2018
 gregwroblewski
 
 
@@ -296,11 +398,11 @@ gregwroblewski
 
 
 
-14482
+14449
 
 ModSecurity.xml
 file
-
+2018
 
 
 
@@ -334,14 +436,14 @@ gregwroblewski
 
 ModSecurityIIS.sln
 file
+2018
 
 
 
-
-2012-07-23T16:40:02.240745Z
-751b20c9f6e615232ff79913b39888e8
-2012-07-07T07:17:33.778098Z
-1988
+2012-08-11T01:08:29.512453Z
+872b0fd97e821ded89678f6b739918cd
+2012-08-12T07:15:27.815427Z
+2018
 gregwroblewski
 
 
@@ -364,11 +466,11 @@ gregwroblewski
 
 
 
-1994
+1986
 
 mymodulefactory.h
 file
-
+2018
 
 
 
@@ -402,14 +504,14 @@ gregwroblewski
 
 Makefile.win
 file
+2018
 
 
 
-
-2012-07-23T16:40:02.240745Z
-bea55154fce7ac93f96d3c6cf3bf856f
-2012-07-20T08:11:55.314689Z
-1993
+2012-08-11T01:08:15.212452Z
+5dadf92f692a27ae33a1c6e0edce8cf2
+2012-08-07T22:55:46.044139Z
+2013
 gregwroblewski
 
 
@@ -432,51 +534,48 @@ gregwroblewski
 
 
 
-2923
+2952
+
+mymodule.cpp
+file
+2018
+
+
+
+2012-08-11T01:08:48.920454Z
+c4fa888ffa7f3a301c9def57d56150fe
+2012-08-12T07:15:27.815427Z
+2018
+gregwroblewski
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+35321
 
 ModSecurityIIS
 dir
 
-mymodule.cpp
-file
-
-
-
-
-2012-07-23T16:40:02.240745Z
-2c9740f258a97846f13f42f589387e16
-2012-07-23T06:56:15.636746Z
-1996
-gregwroblewski
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-34388
-
-winbuild
-dir
-
 ModSecurityIIS.vcxproj.filters
 file
-
+2018
 
 
 
@@ -508,105 +607,6 @@ gregwroblewski
 
 6636
 
-mymodule.h
-file
-
-
-
-
-2012-07-23T16:40:02.236745Z
-56d53fac53c2a8c009c1a1a1f080c270
-2012-07-22T07:43:08.100775Z
-1994
-gregwroblewski
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1248
-
-mod_security2.exp
-file
-
-
-
-
-2012-07-23T16:40:02.236745Z
-80f6919ac99b84905c35b76cc66bfac4
-2012-07-20T08:11:55.314689Z
-1993
-gregwroblewski
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1015
-
-ModSecurityIIS.vcxproj.user
-file
-
-
-
-
-2012-07-23T16:40:02.236745Z
-02816bcc1da4abf7ab716035d355eb7c
-2012-06-25T22:12:29.429483Z
-1976
-gregwroblewski
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-143
+winbuild
+dir
 

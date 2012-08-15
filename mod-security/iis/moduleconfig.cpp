@@ -452,8 +452,11 @@ MODSECURITY_STORED_CONTEXT::~MODSECURITY_STORED_CONTEXT()
 MODSECURITY_STORED_CONTEXT::MODSECURITY_STORED_CONTEXT():
     m_bIsEnabled ( FALSE ),
     m_pszPath( NULL ),
-	m_Config( NULL )
+	m_Config( NULL ),
+	m_dwLastCheck( 0 )
 {
+	m_LastChange.dwLowDateTime = 0;
+	m_LastChange.dwHighDateTime = 0;
 }
 
 DWORD 

@@ -88,12 +88,28 @@ NMAKE -f Makefile.win APACHE=C:\Apache22 PCRE=%WORK%\%PCRE% LIBXML2=%WORK%\%LIBX
 cd %WORK%
 
 copy /y %APACHE%\bin\libapr-1.dll %DROP%
+copy /y %APACHE%\bin\libapr-1.pdb %DROP%
+copy /y %APACHE%\lib\libapr-1.lib %DROP%
 copy /y %APACHE%\bin\libapriconv-1.dll %DROP%
+copy /y %APACHE%\bin\libapriconv-1.pdb %DROP%
+copy /y %APACHE%\lib\libapriconv-1.lib %DROP%
 copy /y %APACHE%\bin\libaprutil-1.dll %DROP%
+copy /y %APACHE%\bin\libaprutil-1.pdb %DROP%
+copy /y %APACHE%\lib\libaprutil-1.lib %DROP%
 copy /y %WORK%\%LIBXML2%\win32\bin.msvc\libxml2.dll %DROP%
+copy /y %WORK%\%LIBXML2%\win32\bin.msvc\libxml2.lib %DROP%
 copy /y %WORK%\%LUA%\src\lua5.1.dll %DROP%
+copy /y %WORK%\%LUA%\src\lua5.1.pdb %DROP%
+copy /y %WORK%\%LUA%\src\lua5.1.lib %DROP%
 copy /y %WORK%\%PCRE%\pcre.dll %DROP%
+copy /y %WORK%\%PCRE%\pcre.pdb %DROP%
+copy /y %WORK%\%PCRE%\pcre.lib %DROP%
 copy /y %WORK%\%ZLIB%\zlib1.dll %DROP%
+copy /y %WORK%\%ZLIB%\zlib1.pdb %DROP%
+copy /y %WORK%\%ZLIB%\zdll.lib %DROP%
 copy /y %WORK%\%CURL%\libcurl.dll %DROP%
+copy /y %WORK%\%CURL%\libcurl.pdb %DROP%
+copy /y %WORK%\%CURL%\libcurl_imp.lib %DROP%
 copy /y %WORK%\mod_security\mlogc\mlogc.exe %DROP%
 copy /y %WORK%\mod_security\iis\modsecurityiis.dll %DROP%
+copy /y %WORK%\mod_security\iis\modsecurityiis.pdb %DROP%

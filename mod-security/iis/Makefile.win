@@ -40,9 +40,9 @@ DEFS=$(DEFS) -DWITH_LUA
 INCLUDES = $(INCLUDES) -I$(LUA)\include -I$(LUA) \
 !ENDIF
 
-CFLAGS= -MD $(INCLUDES) $(DEFS)
+CFLAGS= -MD /Zi $(INCLUDES) $(DEFS)
 
-LDFLAGS = /DEF:"mymodule.def" /MANIFEST /ManifestFile:"ModSecurityIIS.dll.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /TLBID:1 /DYNAMICBASE /NXCOMPAT
+LDFLAGS = /DEF:"mymodule.def" /DEBUG /OPT:REF /OPT:ICF /MANIFEST /ManifestFile:"ModSecurityIIS.dll.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /TLBID:1 /DYNAMICBASE /NXCOMPAT
 
 OBJS1 = mod_security2.obj apache2_config.obj apache2_io.obj apache2_util.obj \
        re.obj re_operators.obj re_actions.obj re_tfns.obj re_variables.obj \
