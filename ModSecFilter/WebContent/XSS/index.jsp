@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Destination</title>
+<title>Insert title here</title>
 </head>
 <body>
-You have reached the destination! 
+<form action="/ModSecFilter/login64" method="POST">
+<input type="text" name="username">
+<input type="text" name="password">
+<input type="submit" name="submit" value="yes">
+</form>
 </body>
 </html>

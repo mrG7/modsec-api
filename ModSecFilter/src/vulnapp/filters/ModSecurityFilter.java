@@ -44,7 +44,10 @@ public class ModSecurityFilter implements Filter {
 			waf.stopEngine();
 		}
 	}
-	
+	/*
+	 * Response Wrapper ( in case of blocked requests)
+	 */
+
 	private String buildRequest(HttpServletRequest httpreq)
 	{
 		/**
@@ -127,7 +130,8 @@ public class ModSecurityFilter implements Filter {
 			httpresp instanceof HttpServletResponse){
 			
 			String requestMethod = httpreq.getMethod();
-		
+			System.out.println("Request method:" + requestMethod);
+			
 			if("GET".equals(requestMethod) || "POST".equals(requestMethod))
 			{
 				/*
@@ -135,7 +139,7 @@ public class ModSecurityFilter implements Filter {
 				 */
 				
 				String rawRequest = buildRequest(httpreq);	
-				System.out.println(rawRequest);
+				System.out.println("==========\n"+rawRequest+"\n==========");
 				
 				/*
 				 * Start Mod Security Engine
@@ -162,6 +166,8 @@ public class ModSecurityFilter implements Filter {
 				}
 				else{
 					System.out.println("Request Denied");
+                    httpresp.sendError(HttpServletResponse.SC_FORBIDDEN);
+                    return;
 				}
 
 			}
