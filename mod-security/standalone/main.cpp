@@ -109,6 +109,7 @@ void log(void *obj, int level, char *str)
 apr_status_t readbody(request_rec *r, char *buf, unsigned int length, unsigned int *readcnt, int *is_eos)
 {
 	int j = event_file_blocks['C'];
+    printf("j:%d\n",j);
 
 	if(j < 0)
 	{
@@ -189,7 +190,7 @@ int initModSecEngine(char *config_file)
 	modsecSetLogHook(NULL, log);
 
 	modsecSetReadBody(readbody);
-	modsecSetReadResponse(readresponse);
+	//modsecSetReadResponse(readresponse);
 
 	modsecInit();
 
@@ -367,6 +368,8 @@ JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrap
 
     initModSecEngine(conf_copy);
     
+    free(conf_copy);
+    (jenv)->ReleaseStringUTFChars(config, conf);
     return 0;
 }
 
@@ -407,6 +410,9 @@ JNIEXPORT jint JNICALL Java_vulnapp_modsecurity_wrappers_ModSecurityWrapper_wrap
 
     garbageCollect();
     
+    free(conf_copy);
+    free(req_copy);
+
     return status;
 }
 
@@ -431,11 +437,10 @@ int main(int argc, char *argv[])
     copy_str(&event_file_path , argv[2]);
     
     FILE *fp = fopen(event_file_path, "rb");
-    
+        
 	raw_req = (char *) malloc(EVENT_FILE_MAX_SIZE);
     int file_len = fread(raw_req, 1, EVENT_FILE_MAX_SIZE - 1, fp);
     raw_req[file_len] = 0;
-
     initModSecEngine(config);    
     
     int status = processRequest(raw_req);
